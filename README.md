@@ -2,7 +2,7 @@
 
 技术栈
 
-- express
+- moa2 (Koa 2.x)
 - jade
 - bootstrap
 - bootstraptable
@@ -14,7 +14,7 @@
 
 ## 前后端分离实践
 
-- 前端：[moa-frontend](https://github.com/moajs/moa-frontend)
+- 前端：[moa2-frontend](https://github.com/moajs/moa2-frontend)
   - public下面的采用nginx做反向代理
   - 其他的采用express+jade精简代码（ajax与后端交互）
 - 后端：[moa-api](https://github.com/moajs/moa-api)
@@ -32,7 +32,7 @@ npm start
 
 - 经典的 jQuery + bootstrap 简单易用
 - 响应式，兼容移动端和pc端
-- expressjs + jade 代码极简，功能强大
+- moa2(Koa 2.x) + jade 代码极简，功能强大
 - 自动挂载路由，在routes目录创建js文件会被自动识别，无需在app.js里配置
 - 代码变动，自动重启服务器
 - 支持log4js日志
