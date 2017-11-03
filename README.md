@@ -12,6 +12,49 @@
 
 ![](doc/preview.png)
 
+## 目录
+
+```shell
+$ tree . -L 3
+.
+├── README.md
+├── app.js
+├── config
+│   ├── index.js
+│   ├── renderConfig.js
+│   └── webpack-hash-map.js
+├── ecosystem.json
+├── layout
+│   ├── error.html
+│   ├── include
+│   │   └── viewport.html
+│   └── index.html
+├── package-lock.json
+├── package.json
+├── public
+│   ├── dist
+│   └── favicon.ico
+├── src
+│   ├── detail
+│   │   ├── App.vue
+│   │   ├── api
+│   │   ├── assets
+│   │   ├── components
+│   │   ├── index.html
+│   │   ├── main.js
+│   │   └── router
+│   └── index
+│       ├── App.vue
+│       ├── api
+│       ├── index.html
+│       └── main.js
+└── tests
+    ├── router.map.js
+    └── site.test.js
+
+14 directories, 20 files
+```
+
 ## 前后端分离实践
 
 - 前端：[moa2-frontend](https://github.com/moajs/moa2-frontend)
