@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../index');
+var app = require('../app');
 // console.dir(app)
 
 var debug = require('debug')('demo:server');
