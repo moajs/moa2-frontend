@@ -1,7 +1,0 @@
-{{ extend('../layout/layout.simditor.art') }}
-{{ block  'content'}}
-  {{include '../includes/simditor.art'}}
-  <script>
-    window.qn_token = "{{token}}"
-  </script>
-{{ /block}}

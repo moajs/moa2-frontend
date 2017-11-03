@@ -1,4 +1,0 @@
-{{ extend('../layout.art') }}
-{{ block  'content'}}
-  {{include '../templates/nodeGroupManager.art'}}
-{{ /block}}
