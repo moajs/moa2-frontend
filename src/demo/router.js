@@ -6,6 +6,12 @@ router.get('/bootstraptable', (ctx, bootstraptable) => {
   });
 });
 
+router.get('/bootstrap_table', (ctx, bootstraptable) => {
+  return ctx.render('src/demo/bootstrap_table', {
+    title: 'bootstrap_table'
+  });
+});
+
 
 router.get('/cronJobQueue', (ctx, next) => {
   return ctx.render('src/demo/cronJobQueue', {

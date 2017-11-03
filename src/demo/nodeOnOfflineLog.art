@@ -1,4 +1,4 @@
-{{ extend('../layout.art') }}
+{{ extend('../../layout/layout.art') }}
 {{ block  'content'}}
-  {{include '../templates/nodeOnOfflineLog.art'}}
+  {{include '../../layout/templates/nodeOnOfflineLog.art'}}
 {{ /block}}

@@ -1,4 +1,4 @@
-{{ extend('../layout.art') }}
+{{ extend('../../layout/layout.art') }}
 {{ block  'content'}}
-  {{include '../templates/tasktrackerMonitor.art'}}
+  {{include '../../layout/templates/tasktrackerMonitor.art'}}
 {{ /block}}

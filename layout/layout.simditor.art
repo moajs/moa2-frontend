@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>{{title}}</title>
     {{include './head.art'}}
-    {{include '../includes/simditor_head.art'}}
+    {{include './includes/simditor_head.art'}}
 </head>
 <body class='pace-done'>
   <div class='wrapper'>
