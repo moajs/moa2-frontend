@@ -7,7 +7,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const render = require('koa-art-template')
-const mount = require('mount-koa-routes')
+const mount = require('mount2')
 
 global.$middlewares = require('mount-middlewares')(__dirname);
 console.log($middlewares);
@@ -24,7 +24,7 @@ app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
 render(app, {
-  root: path.join(__dirname, 'app/views'),
+  root: path.join(__dirname, '.'),
   extname: '.art',
   debug: process.env.NODE_ENV !== 'production'
 });
@@ -51,7 +51,7 @@ mount_uploadify (app, {
 // simple
 // mount(app);
 // with path
-mount(app, __dirname + '/app/routes', true);
+mount(app, __dirname + '/src', true);
 
 // error-handling
 app.on('error', (err, ctx) => {

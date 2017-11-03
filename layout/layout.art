@@ -4,15 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>{{title}}</title>
-    {{include './layout/head.art'}}
+    {{include './head.art'}}
 </head>
 <body class='pace-done'>
   <div class='wrapper'>
-    {{include './layout/menu.art'}}
+    {{include './menu.art'}}
     <div id="page-wrapper" style="min-height: 761px;" class="gray-bg">
-    {{include './layout/topbar.art'}}
+    {{include './topbar.art'}}
     {{block 'content'}}{{/block}}
-    {{include './layout/footer.art'}}
+    {{include './footer.art'}}
     </div>
     </div>
 </body>
