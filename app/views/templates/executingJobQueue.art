@@ -1,0 +1,139 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-12">
+    <h2>&#x6267;&#x884C;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;</h2>
+    <ol class="breadcrumb">
+      <li><a>&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x7BA1;&#x7406;</a></li>
+      <li class="active"><b>&#x6267;&#x884C;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;</b></li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h3><span class="text-navy">&#x6267;&#x884C;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;</span></h3>
+        </div>
+        <div class="ibox-content">
+          <form id="form" method="post" onsubmit="return false" class="form-horizontal">
+            <div class="form-group">
+              <label style="width:10%" class="col-sm-2 control-label">&#x4EFB;&#x52A1;ID</label>
+              <div class="col-sm-3">
+                <input type="text" name="taskId" placeholder="请输入任务ID(TaskId)" class="form-control"/>
+              </div>
+              <label style="width:10%" class="col-sm-2 control-label">&#x63D0;&#x4EA4;&#x8282;&#x70B9;&#x7EC4;</label>
+              <div class="col-sm-3">
+                <select name="submitNodeGroup" class="form-control">
+                  <option value="">-- &#x4E0D;&#x9650; --</option>                                    #foreach($nodeGroup in $jobClientNodeGroups)
+                  <option value="$nodeGroup.name">$nodeGroup.name</option>                                    #end
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label style="width:10%" class="col-sm-2 control-label">&#x6267;&#x884C;&#x8282;&#x70B9;&#x7EC4;</label>
+              <div class="col-sm-3">
+                <select name="taskTrackerNodeGroup" class="form-control">
+                  <option value="">-- &#x4E0D;&#x9650; --</option>                                    #foreach($nodeGroup in $taskTrackerNodeGroups)
+                  <option value="$nodeGroup.name">$nodeGroup.name</option>                                    #end
+                </select>
+              </div>
+              <label style="width:10%" class="col-sm-2 control-label">&#x53CD;&#x9988;&#x5BA2;&#x6237;&#x7AEF;</label>
+              <div class="col-sm-2">
+                <select name="needFeedback" class="form-control">
+                  <option value="">-- &#x4E0D;&#x9650; --</option>
+                  <option value="true">&#x9700;&#x8981;</option>
+                  <option value="false">&#x4E0D;&#x9700;&#x8981;</option>
+                </select>
+              </div>
+              <div style="width:70px;" class="col-sm-1">
+                <button id="searchBtn" type="button" class="btn btn-primary">&#x641C;&#x7D22;</button>
+              </div>
+              <div class="col-sm-1">
+                <button id="resetBtn" type="reset" class="btn btn-warning">&#x91CD;&#x7F6E;</button>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div id="ltstableContainer" class="ibox-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script id="ltstable" type="text/html">
+  <table class="table table-stripped toggle-arrow-tiny footable" data-page-size="10">
+  <thead>
+  <tr>
+  <th data-toggle="true">任务ID</th>
+  <th data-hide="all">提交节点组</th>
+  <th>执行节点组</th>
+  <th>Cron表达式</th>
+  <th data-hide="all">优先级</th>
+  <th>反馈客户端</th>
+  <th>重试次数</th>
+  <th data-hide="all">用户参数</th>
+  <th data-hide="phone,tablet">创建时间</th>
+  <th data-hide="all">修改时间</th>
+  <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{each rows as row index}}
+  <tr>
+  <td>{{row.taskId}}</td>
+  <td>{{row.submitNodeGroup}}</td>
+  <td>{{row.taskTrackerNodeGroup}}</td>
+  <td>{{row.cronExpression}}</td>
+  <td>{{row.priority}}</td>
+  <td>{{row.needFeedback | format:'needFeedbackLabel',row}}</td>
+  <td>{{row.retryTimes}}</td>
+  <td>{{row.extParams | format:'stringifyJSON'}}</td>
+  <td>{{row.gmtCreated | dateFormat:'yyyy-MM-dd HH:mm:ss'}}</td>
+  <td>{{row.gmtModified | dateFormat:'yyyy-MM-dd HH:mm:ss'}}</td>
+  <td>{{row.opt | format:'optFormat',row}}</td>
+  </tr>
+  {{/each}}
+  {{if results == 0}}
+  <tr>
+  <td colspan="15">暂无数据</td>
+  </tr>
+  {{/if}}
+  </tbody>
+  <tfoot>
+  <tr>
+  <td colspan="9">
+  <span>共{{results}}条记录，每页展示{{pageSize}}条</span>
+  <ul class="pagination-sm pull-right"></ul>
+  </td>
+  </tr>
+  </tfoot>
+  </table>
+</script>
+<script>
+  $(document).ready(function () {
+  LTS.colFormatter.optFormat = function (v, row) {
+  var logUrl = "job-logger.htm?taskId=" + row.taskId + "&taskTrackerNodeGroup=" + row.taskTrackerNodeGroup;
+  return '<a target="_blank" href="' + logUrl + '"><span class="label label-info"><i class="fa fa-file-code-o"></i> 日志</span></a>&nbsp;';
+  }
+  var ltsTable = $("#ltstableContainer").ltsTable({
+  url: 'api/job-queue/executing-job-get',
+  templateId: 'ltstable'
+  });
+  $(document).on("click", "#searchBtn", function () {
+  var params = {};
+  $.each($('#form').parent().find(".form-control"), function () {
+  var name = $(this).attr("name");
+  var value = $(this).val();
+  params[name] = value;
+  });
+  ltsTable.post(params, 1);
+  });
+  $("#searchBtn").trigger("click");
+  });
+</script>

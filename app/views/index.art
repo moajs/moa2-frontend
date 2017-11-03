@@ -1,0 +1,4 @@
+{{ extend('./layout.art') }}
+{{ block  'content'}}
+  {{include './templates/index.art'}}
+{{ /block}}

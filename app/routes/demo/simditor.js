@@ -1,7 +1,7 @@
 
 var simditor_qn_config = require('../../../config/simditor_qn')
 
-var router = koa_router()
+const router = require('koa-router')()
 
 /* GET home page. */
 router.get('/', (ctx, next) => {

@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-
+const debug = require('debug')("moa2")
 // 检查用户会话
 module.exports = (ctx, next) => {
   debug('..request_logger2.')

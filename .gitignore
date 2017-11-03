@@ -31,4 +31,5 @@ config/kue.js
 config/simditor_qn.js
 config/nginx.conf
 uploads/
+*DS_Store*
 package-lock.json
