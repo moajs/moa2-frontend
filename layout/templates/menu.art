@@ -3,7 +3,7 @@
     <ul id="side-menu" class="nav metismenu">
       <li class="nav-header">
         <div class="dropdown profile-element">
-          <div id="current-env" env="daily" class="env-element">Moajs管理后台</div>
+          <div id="current-env" env="daily" class="env-element">{{name}}</div>
         </div>
         <div class="logo-element">Moajs</div>
       </li>
@@ -15,27 +15,7 @@
         </a>
       </li>
 
-      <li>
-  <a href="#">
-    <i class="fa fa-server"></i>
-    <span class="nav-label">功能展示courses</span>
-    <span class="fa arrow"></span>
-  </a>
-  <ul class="nav nav-second-level collapse">
-    <li>
-      <a href="/demo/simditor">Simditor</a>
-    </li>
-    <li>
-      <a href="/demo/uploadify">Uploadify</a>
-    </li>
-    <li>
-      <a href="/demo/bootstrap_table">bootstrap-table</a>
-    </li>
-    <li>
-      <a href="/demo/nodeJvmInfo">节点JVM信息</a>
-    </li>
-  </ul>
-</li>
+      {{ new_menu }}
     </ul>
   </div>
   <script>

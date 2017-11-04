@@ -9,8 +9,10 @@ const logger = require('koa-logger')
 const render = require('koa-art-template')
 const mount = require('mount2')
 
-global.$middlewares = require('mount-middlewares')(__dirname);
-console.log($middlewares);
+// global.$middlewares = require('mount-middlewares')(__dirname);
+// console.log($middlewares);
+
+require('./menu')()
 
 // error handler
 onerror(app)

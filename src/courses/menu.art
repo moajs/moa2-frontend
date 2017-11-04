@@ -1,0 +1,21 @@
+<li>
+  <a href="#">
+    <i class="fa fa-server"></i>
+    <span class="nav-label">功能展示{{folder}}</span>
+    <span class="fa arrow"></span>
+  </a>
+  <ul class="nav nav-second-level collapse">
+    <li>
+      <a href="/demo/simditor">Simditor</a>
+    </li>
+    <li>
+      <a href="/demo/uploadify">Uploadify</a>
+    </li>
+    <li>
+      <a href="/demo/bootstrap_table">bootstrap-table</a>
+    </li>
+    <li>
+      <a href="/demo/nodeJvmInfo">节点JVM信息</a>
+    </li>
+  </ul>
+</li>
