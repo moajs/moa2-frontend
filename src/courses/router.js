@@ -1,16 +1,72 @@
 const router = require('koa-router')()
-
-router.prefix('/users')
+const request = require('request')
+// router.prefix('/courses')
 
 router.get('/', function (ctx, next) {
-  ctx.render('src/users/index', {
+  ctx.render('src/courses/list', {
     title: "2323"
   })
 })
 
+router.get('/new', function (ctx, next) {
+  ctx.render('src/courses/new', {
+    title: "2323"
+  })
+})
 
-router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
+// Api
+router.get('/api', function (ctx, next) {
+  return new Promise(function (resolve, reject) {
+    request('http://127.0.0.1:3000/api/courses', function (error, response, body) {
+      console.log('error:', error); // Print the error if one occurred
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+
+      var obj = JSON.parse(body)
+      var courses = obj.data.courses
+      console.log('body:', courses); // Print the HTML for the Google homepage.
+      resolve(courses)
+    });
+  }).then(function (courses) {
+    ctx.body = {
+      "total": courses.length,
+      "rows": courses
+    }
+  })
+})
+
+router.post('/api', function (ctx, next) {
+  return new Promise(function (resolve, reject) {
+    request.post({ url: 'http://127.0.0.1:3000/api/courses', form: req.body }, function (error, response, body) {
+      console.log('error:', error); // Print the error if one occurred
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+
+      var courses = JSON.parse(body)
+
+      console.log(body)
+      console.dir(courses)
+      resolve(courses)
+    });
+  }).then(function (courses) {
+    ctx.body = courses
+  })
+})
+
+router.delete('/api/:id', function (ctx, next) {
+  let id = ctx.params.id
+  return new Promise(function (resolve, reject) {
+    request.delete({ url: 'http://127.0.0.1:3000/api/courses/' + id, form: {} }, function (error, response, body) {
+      console.log('error:', error); // Print the error if one occurred
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+
+      var courses = JSON.parse(body)
+
+      console.log(body)
+      console.dir(courses)
+      resolve(courses)
+    });
+  }).then(function (courses) {
+    ctx.body = courses
+  })
 })
 
 module.exports = router

@@ -1,12 +1,12 @@
 <li>
   <a href="#">
     <i class="fa fa-server"></i>
-    <span class="nav-label">功能展示{{folder}}</span>
+    <span class="nav-label">{{folder}}</span>
     <span class="fa arrow"></span>
   </a>
   <ul class="nav nav-second-level collapse">
     <li>
-      <a href="/demo/simditor">Simditor</a>
+      <a href="/{{folder}}">Simditor</a>
     </li>
     <li>
       <a href="/demo/uploadify">Uploadify</a>

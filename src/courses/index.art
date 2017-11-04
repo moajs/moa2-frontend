@@ -8,6 +8,6 @@ block content
 
 <% extend('../../layout/layout.art') %>
 <% block('content', function(){ %>
-  <h1>{{h1}}</h1>
+  <h1>{{h1}} courses</h1>
   <p> Welcome to {{title}} </p>
 <% }) %>
