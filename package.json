@@ -32,6 +32,8 @@
     "simditor-qn": "^1.0.2"
   },
   "devDependencies": {
+    "mongoose": "^4.13.0",
+    "mongoosedao": "^1.0.13",
     "nodemon": "^1.10.2"
   }
 }
