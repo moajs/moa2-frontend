@@ -23,16 +23,7 @@
   </a>
   <ul class="nav nav-second-level collapse">
     <li>
-      <a href="/courses">Simditor</a>
-    </li>
-    <li>
-      <a href="/demo/uploadify">Uploadify</a>
-    </li>
-    <li>
-      <a href="/demo/bootstrap_table">bootstrap-table</a>
-    </li>
-    <li>
-      <a href="/demo/nodeJvmInfo">节点JVM信息</a>
+      <a href="/courses">List</a>
     </li>
   </ul>
 </li>

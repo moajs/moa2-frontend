@@ -1,16 +1,16 @@
-<% extend('../../layout/layout.art') %>
+<% extend('../../layout/layout.simditor.art') %>
 
   <% block('content', function(){ %>
     <!-- .full-height-scroll -->
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-12">
-        <h2>创建</h2>
+        <h2>编辑</h2>
         <ol class="breadcrumb">
           <li>
-            <a href='/courses/'>列表</a>
+              <a href='/courses/'>列表</a>
           </li>
           <li class="active">
-            <b>创建</b>
+            <b>编辑</b>
           </li>
         </ol>
       </div>
