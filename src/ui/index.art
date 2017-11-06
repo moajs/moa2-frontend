@@ -99,16 +99,21 @@
       </div>
       <br>
       <div class="row">
-          <div class="col-sm-10">
+          <div class="col-sm-9">
           </div>
-          <div class="col-sm-1">
-            <button id="submit" type="submit" class="btn btn-primary">生成</button>
+          <div class="col-sm-3">
+            <button id="save_config" type="submit" class="btn btn-primary">保存配置</button>
+            <button id="generate_code" type="submit" class="btn btn-primary">生成代码</button>
           </div>
       </div> 
       <br>
       <br>
       <script>
         $(document).ready(function () {
+          $('#save_config').on('click', function () {
+          });
+          $('#generate_code').on('click', function () { 
+          });
           $('#submit').on('click', function () {
             // alert($('#editor').val());
             var api_name = $('input[name="api_name"]').val();
