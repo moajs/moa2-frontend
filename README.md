@@ -82,6 +82,7 @@ npm start
 - 内置[simditor](http://simditor.tower.im/)和七牛上传图片
 - 内置[uploadify](https://github.com/i5ting/uploadify)文件上传
 - 使用gulp构建
+- 使用lowdb纯json存储配置文件
 
 ## Configuration
 
