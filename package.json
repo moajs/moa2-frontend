@@ -32,7 +32,8 @@
     "open": "0.0.5",
     "qn": "^1.1.0",
     "request": "^2.83.0",
-    "simditor-qn": "^1.0.2"
+    "simditor-qn": "^1.0.2",
+    "tpl_apply_art": "^1.0.5"
   },
   "devDependencies": {
     "mongoose": "^4.13.0",

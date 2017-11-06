@@ -82,12 +82,12 @@
           <table id="tableid" data-toggle="table" data-smart-display="false" data-click-to-select="false" data-pagination="false" data-side-pagination="server"
             data-page-list="[1,5, 10, 20, 50, 100, 200]" data-response-handler="responseHandler" data-classes="table table-hover table-no-bordered table-condensed table-responsive "
             data-search="false" data-show-export="true" data-show-pagination-switch="false" data-show-footer="false" data-show-refresh="true"
-            data-show-toggle="true" data-show-columns="true" data-striped="true" data-detail-view="true" data-detail-formatter="detailFormatter"
+            data-show-toggle="true" data-show-columns="true" data-striped="true" data-detail-view="false" data-detail-formatter="detailFormatter"
             data-minimum-count-columns="2">
             <thead>
               <tr>
                 <!-- th(data-field='state',data-radio='true')　单选-->
-                <th data-field="id" data-align="center" data-formatter="showSerialNum">　序号</th>
+                <th data-field="id" data-align="center" data-formatter="showSerialNum">序号</th>
                 <th data-field="en_name" data-align="center">英文名</th>
                 <th data-field="zh_name" data-align="center">中文名</th>
                 <th data-field="type" data-align="center"> 类型 </th>
