@@ -5,9 +5,11 @@ const model = require('./model')
 
 // Api
 router.get('/api', function (ctx, next) {
-  var config = ctx.session.config
+  // ctx.session.config = {}
+  var config = ctx.session.config ? ctx.session.config:{items:[]}
+  
   ctx.body = {
-    "total": config.length,
+    "total": config.items.length,
     "rows": config.items
   }
 })
@@ -15,7 +17,9 @@ router.get('/api', function (ctx, next) {
 router.post('/api', function (ctx, next) {
   var body = ctx.request.body
 
-  var config = ctx.session.config
+  console.log(body)
+
+  var config = ctx.session.config ? ctx.session.config : {}
 
   if (body.api_name) config.api_name = body.api_name
   if (body.api_name_zh) config.api_name_zh = body.api_name_zh
@@ -26,18 +30,35 @@ router.post('/api', function (ctx, next) {
     type: body.item_type
   }
 
-  config.items ? config.items.push(item) : [item]
-
-  ctx.body = config
+  config.items ? config.items.push(item) : config.items = [item]
+  console.log(config)
+  ctx.body = {
+    data: config,
+    status: {
+      code: 0,
+      msg: 'sucess'
+    }
+  }
 })
 
-router.post('/api/delete/:en_name', function (ctx, next) {
+router.delete('/api/:en_name', function (ctx, next) {
   var en_name = ctx.params.en_name
+  var config = ctx.session.config ? ctx.session.config : {}
+  var newItems = []
 
-  config.items.map(function (item) {
-    if (item.en_name != en_name) return item
+   config.items.map(function (item) {
+    console.log(en_name)
+    console.log(item.en_name)
+    if (item.en_name === en_name) {
+      
+    } else {
+      newItems.push(item)
+    }
   });
 
+  console.log(en_name)
+  console.log(newItems)
+  config.items = newItems
   ctx.body = config
 })
 

@@ -32,9 +32,9 @@
                   <div class="col-sm-2">
                     <input type="text" name="api_name" placeholder="英文" class="form-control" />
                   </div>
-                  <label class="col-sm-2 control-label">字段中文名称</label>
+                  <label class="col-sm-2 control-label">字段英文名称</label>
                   <div class="col-sm-4">
-                    <input type="text" name="item_zh_name" placeholder="中文" class="form-control" />
+                    <input type="text" name="item_en_name" placeholder="英文" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
@@ -42,9 +42,9 @@
                   <div class="col-sm-2">
                     <input type="text" name="api_name_zh" placeholder="中文" class="form-control" />
                   </div>
-                  <label class="col-sm-2 control-label">字段英文名称</label>
+                  <label class="col-sm-2 control-label">字段中文名称</label>
                   <div class="col-sm-4">
-                    <input type="text" name="item_cn_name" placeholder="英文" class="form-control" />
+                    <input type="text" name="item_zh_name" placeholder="中文" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
@@ -54,9 +54,9 @@
                     <label class="col-sm-2 control-label">字段类型</label>
                     <div class="col-sm-4">
                         <select name="item_type" class="form-control">
-                            <option value="REAL_TIME_JOB">String</option>
-                            <option value="TRIGGER_TIME_JOB">Number</option>
-                            <option value="CRON_JOB">Image</option>
+                            <option value="string">String</option>
+                            <option value="number">Number</option>
+                            <option value="image">Image</option>
                           </select>
                     </div>
                   </div>
@@ -78,23 +78,18 @@
         </div>
       </div> 
       <div class="row">
-          <div class="col-sm-12">
-            <button id="submit" type="submit" class="btn btn-primary">提交</button>
-          </div>
-      </div> 
-      <div class="row">
         <div class="col-sm-12">
-          <table id="tableid" data-toggle="table" data-smart-display="false" data-click-to-select="false" data-pagination="true" data-side-pagination="server"
+          <table id="tableid" data-toggle="table" data-smart-display="false" data-click-to-select="false" data-pagination="false" data-side-pagination="server"
             data-page-list="[1,5, 10, 20, 50, 100, 200]" data-response-handler="responseHandler" data-classes="table table-hover table-no-bordered table-condensed table-responsive "
             data-search="false" data-show-export="true" data-show-pagination-switch="false" data-show-footer="false" data-show-refresh="true"
             data-show-toggle="true" data-show-columns="true" data-striped="true" data-detail-view="true" data-detail-formatter="detailFormatter"
-            data-minimum-count-columns="2" data-height="590">
+            data-minimum-count-columns="2">
             <thead>
               <tr>
                 <!-- th(data-field='state',data-radio='true')　单选-->
                 <th data-field="id" data-align="center" data-formatter="showSerialNum">　序号</th>
-                <th data-field="en_name" data-align="center" data-formatter="showId">中文名</th>
-                <th data-field="zh_name" data-align="center">英文名</th>
+                <th data-field="en_name" data-align="center">英文名</th>
+                <th data-field="zh_name" data-align="center">中文名</th>
                 <th data-field="type" data-align="center"> 类型 </th>
                 <th data-field="purchase" data-align="center" data-formatter="purchaseFormatter" data-events="operationEvent">操作</th>
               </tr>
@@ -102,6 +97,16 @@
           </table>
         </div>
       </div>
+      <br>
+      <div class="row">
+          <div class="col-sm-10">
+          </div>
+          <div class="col-sm-1">
+            <button id="submit" type="submit" class="btn btn-primary">提交</button>
+          </div>
+      </div> 
+      <br>
+      <br>
       <script>
         $(document).ready(function () {
           $('#submit').on('click', function () {
@@ -186,10 +191,6 @@
 
         function purchaseFormatter() {
           return [
-            '<a class="action_modify" href="javascript:void(0)" title="Edit">',
-            '修改',
-            '</a>',
-            '|',
             '<a class="action_delete" href="javascript:void(0)" title="Edit">',
             '删除',
             '</a>'
@@ -201,7 +202,7 @@
             var msg = "您真的确定要删除吗？"; 
             if (confirm(msg) == true) {
               $.ajax({
-                url: '/ui/api/' + row._id,
+                url: '/ui/api/' + row.en_name,
                 type: 'DELETE',
                 success: function (result) {
                   // Do something with the result
@@ -212,12 +213,6 @@
             } else {  
               return false; 
             }
-          },
-          'click .action_modify': function (e, value, row, index) {
-            console.log(row)
-            // var i = row.recommend == false ? 0 : 1
-            console.log('/ui/' + row._id + '/edit');
-            window.location.href = '/ui/' + row._id + '/edit'
           }
         }
 
