@@ -26,6 +26,7 @@
 // 自动高亮多级菜单, 必须放在metisMenu之前执行
 $(document).ready(function () {
     var pgurl = window.location.href;
+    $('#side-menu').find('li.active').eq(0).removeClass('active')
     // 三级菜单高亮：ul#side-menu -> li -> ul.nav -> li -> a -> ul.nav -> li -> a
     $("ul#side-menu>li>ul.nav>li>ul.nav>li>a").each(function () {
     if ($(this).attr("href") != '#' && pgurl.indexOf($(this).attr("href").split("?")[0]) >= 0) {

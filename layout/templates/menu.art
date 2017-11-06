@@ -18,13 +18,4 @@
       {{ new_menu }}
     </ul>
   </div>
-  <script>
-  $(function() {
-    if (window.location.pathname !== '/') {
-      setTimeout(function() {
-        $('#side-menu').find('li.active').eq(0).removeClass('active')
-      },10)
-    }
-  })
-  </script>
 </nav>
