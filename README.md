@@ -132,6 +132,22 @@ module.exports = {
 - qn是qn这个node模块的配置
 - url是最终图片地址，可以自己定义
 
+## 使用lowdb纯json存储配置文件
+
+```
+{
+    api_name: api_name,
+	api_name_zh: api_name_zh,
+	items: [
+		 {
+			item_zh_name: item_zh_name,
+            item_en_name: item_en_name,
+            item_type: item_type
+		}
+	]
+}
+```
+
 ## Tasks
 
 - `npm start` 启动服务器

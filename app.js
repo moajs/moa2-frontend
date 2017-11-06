@@ -8,6 +8,15 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const render = require('koa-art-template')
 const mount = require('mount2')
+// for config storage
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('db.json')
+global.db = low(adapter)
+
+// Set some defaults
+db.defaults({ posts: [], user: {} })
+.write()
 
 const session = require('koa-session');
 app.keys = ['some secret hurr'];

@@ -2,6 +2,7 @@
 const request = require('request')
 const model = require('./model')
 
+
 // Api
 router.get('/api', function (ctx, next) {
   var config = ctx.session.config

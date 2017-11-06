@@ -76,7 +76,12 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> 
+      <div class="row">
+          <div class="col-sm-12">
+            <button id="submit" type="submit" class="btn btn-primary">提交</button>
+          </div>
+      </div> 
       <div class="row">
         <div class="col-sm-12">
           <table id="tableid" data-toggle="table" data-smart-display="false" data-click-to-select="false" data-pagination="true" data-side-pagination="server"
@@ -105,17 +110,22 @@
             var api_name_zh = $('input[name="api_name_zh"]').val();
             var item_zh_name = $('input[name="item_zh_name"]').val();
             var item_en_name = $('input[name="item_en_name"]').val();
-            var prompt = $('input[name="price"]').val();
+            var item_type = $('select[name="item_type"]').val();
+    
             var body = {
-              name: cname,
-              price: price,
-              target_user: target_user,
-              prompt: prompt
+              api_name: api_name,
+              api_name_zh: api_name_zh,
+              item_zh_name: item_zh_name,
+              item_en_name: item_en_name,
+              item_type: item_type
             }
             // return;
             $.post('/ui/api', body, function (res) {
-              alert(res.status.code === 0 ? "创建成功" : "创建失败")
-              window.location.href = '/courses/list'
+              if (res.status.code === 0 ) {
+                alert(res.status.code === 0 ? "创建成功" : "创建失败")
+                // window.location.href = '/ui/list'
+                $("#tableid").bootstrapTable('refresh');
+              }
             })
           });
         });
