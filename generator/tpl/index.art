@@ -1,0 +1,134 @@
+<% extend('../../layout/layout.bootstrap.art') %>
+<% block('content', function(){ %>
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-12">
+        <h2>{{api_name_zh}}管理</h2>
+        <ol class="breadcrumb">
+          <li>
+            <b><a href="/{{api_name}}/">{{api_name_zh}}列表</a></b>
+          </li>
+          <li>
+            <a href="//{{api_name}}/new">创建{{api_name_zh}}</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="tableid" data-toggle="table" data-smart-display="false" data-click-to-select="false" data-pagination="true" data-side-pagination="server"
+            data-page-list="[1,5, 10, 20, 50, 100, 200]" data-response-handler="responseHandler" data-classes="table table-hover table-no-bordered table-condensed table-responsive "
+            data-search="false" data-show-export="true" data-show-pagination-switch="false" data-show-footer="false" data-show-refresh="true"
+            data-show-toggle="true" data-show-columns="true" data-striped="true" data-detail-view="true" data-detail-formatter="detailFormatter"
+            data-minimum-count-columns="2" data-height="590">
+            <thead>
+              <tr>
+                <!-- th(data-field='state',data-radio='true')　单选-->
+                <th data-field="id" data-align="center" data-formatter="showSerialNum">　序号</th>
+                {{#each items}}
+                  <th data-field="{{en_name}}" data-align="center" {{type}}>{{zh_name}}</th>
+                {{/each}}
+                <th data-field="purchase" data-align="center" data-formatter="purchaseFormatter" data-events="operationEvent">操作</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+      <script>
+        $(function () {
+          var $obj = $('#tableid');
+          var url = '//{{api_name}}/api/';
+          var params = function queryParams(params) {
+            return {
+              limit: params.limit,
+              offset: params.offset
+            }
+          }
+          getTables($obj, url, 'get', params);
+        });
+        //发送请求获取数据
+        function getTables(obj, url, method, params) {
+          $(obj).bootstrapTable('destroy');
+          $(obj).bootstrapTable({
+            url: url,
+            method: method,
+            queryParams: params
+          });
+        }
+        //返回数据处理
+        function responseHandler(res) {
+          return res
+        }
+        //样式的调整
+        function radioStyle() {
+          return {
+            css: {
+              'min-width': '35px'
+            }
+          }
+        }
+        //获取ID
+        function showId(value, row, index) {
+          return "<a href='//{{api_name}}/"+ row._id + "' target='_self'> " + row._id + " </a>"
+        }
+        //获取表格序号
+        function showSerialNum(value, row, index) {
+          return index + 1;
+        }
+        //详情显示
+        function detailFormatter(index, row, element) {
+          return "暂无内容";
+        }
+        function showImage(index, row, element) {
+          console.log(row)
+          if (row.picture) {
+            return "<img width='60px' src='" + row.picture + "'></img>"
+          }
+          return "暂无图文说明";
+        }
+        function purchaseFormatter() {
+          return [
+            '<a class="action_modify" href="javascript:void(0)" title="Edit">',
+            '修改',
+            '</a>',
+            '|',
+            '<a class="action_delete" href="javascript:void(0)" title="Edit">',
+            '删除',
+            '</a>'].join('');
+        }
+        window.operationEvent = {
+          'click .action_delete': function (e, value, row, index) {
+            console.log(row)
+            var msg = "您真的确定要删除吗？";
+             if (confirm(msg) == true) {
+              $.ajax({
+                url: '//{{api_name}}/api/' + row._id,
+                type: 'DELETE',
+                success: function (result) {
+                  // Do something with the result
+                  $("#tableid").bootstrapTable('refresh');
+                }
+              });
+                return true;
+             } else {
+                return false;
+             }
+          },
+          'click .action_modify': function (e, value, row, index) {
+            console.log(row)
+            // var i = row.recommend == false ? 0 : 1
+            console.log('//{{api_name}}/' + row._id + '/edit');
+            window.location.href = '//{{api_name}}/' + row._id + '/edit'
+          }
+        }
+
+        function getQueryStringByName(name) {
+          var result = decodeURI(location.search).match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+          if (result == null || result.length < 1) {
+            return "";
+          }
+          return decodeURI(result[1]);
+        }
+      </script>
+    </div>
+<% }) %>

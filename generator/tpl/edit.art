@@ -1,0 +1,112 @@
+<% extend('../../layout/layout.simditor.art') %>
+
+  <% block('content', function(){ %>
+    <!-- .full-height-scroll -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-12">
+        <h2>编辑</h2>
+        <ol class="breadcrumb">
+          <li>
+              <a href='/courses/'>列表</a>
+          </li>
+          <li class="active">
+            <b>编辑</b>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h3>
+                <span class="text-navy">新建课程</span>
+              </h3>
+            </div>
+            <div class="ibox-content">
+              <form id="form" method="post" onsubmit="return false" class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">课程名称</label>
+                  <div class="col-sm-4">
+                    <input type="text" name="name" placeholder="标题一定醒目" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">价格</label>
+                  <div class="col-sm-4">
+                    <input type="text" name="price" placeholder="整数" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">提示信息</label>
+                  <div class="col-sm-4">
+                    <input type="text" name="prompt" placeholder="官方提示信息" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">受众</label>
+                  <div class="col-sm-4">
+                    <input type="text" name="target_user" placeholder="细分用户群体" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">状态</label>
+                  <div class="col-sm-2">
+                    <select name="jobType" class="form-control">
+                      <option value="REAL_TIME_JOB">更新中</option>
+                      <option value="TRIGGER_TIME_JOB">直播课程</option>
+                      <option value="CRON_JOB">不可用</option>
+                    </select>
+                  </div>
+                  <div id="cronJob" style="display:none;" class="col-sm-3">
+                    <input type="text" name="cronExpression" placeholder="请输入CronExpression" class="form-control" />
+                  </div>
+                  <div id="triggerTimeJob" style="display:none;" class="col-sm-3">
+                    <input id="triggerTime" type="text" style="width:160px" name="triggerTime" date-format="yyyy-MM-dd HH:mm:ss" placeholder="请输入触发时间"
+                      class="form-control datepicker" />
+                  </div>
+                </div>
+                <div class="form-group full-height-scroll">
+                  <textare id="editor" placeholder="课程具体内容，请详细描述" autofocus="autofocus"></textare>
+                </div>
+                <div class="form-group">
+                  <div style="width:70px;" class="col-sm-1 col-sm-offset-3">
+                    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                  <div style="width:70px;" class="col-sm-1 col-sm-offset-3">
+                    <button id="editBtn" type="button" class="btn btn-danger">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $('#submit').on('click', function () {
+          // alert($('#editor').val());
+          var cname = $('input[name="name"]').val();
+          var price = $('input[name="price"]').val();
+          var target_user = $('input[name="target_user"]').val();
+          var prompt = $('input[name="price"]').val();
+          var body = {
+            name: cname,
+            price: price,
+            target_user: target_user,
+            prompt: prompt
+          }
+          // return;
+          $.post('/api/courses', body, function (res) {
+            alert(res.status.code === 0 ? "创建成功" : "创建失败")
+            window.location.href = '/courses/list'
+          })
+        });
+      });
+    </script>
+    <script>window.qn_token = ""</script>
+
+    <% }) %>

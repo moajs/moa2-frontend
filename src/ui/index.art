@@ -86,7 +86,6 @@
             data-minimum-count-columns="2">
             <thead>
               <tr>
-                <!-- th(data-field='state',data-radio='true')　单选-->
                 <th data-field="id" data-align="center" data-formatter="showSerialNum">序号</th>
                 <th data-field="en_name" data-align="center">英文名</th>
                 <th data-field="zh_name" data-align="center">中文名</th>

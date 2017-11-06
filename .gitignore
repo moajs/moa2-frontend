@@ -33,3 +33,4 @@ config/nginx.conf
 uploads/
 *DS_Store*
 package-lock.json
+src/u/

@@ -29,6 +29,17 @@
 </li><li>
   <a href="#">
     <i class="fa fa-server"></i>
+    <span class="nav-label">u</span>
+    <span class="fa arrow"></span>
+  </a>
+  <ul class="nav nav-second-level collapse">
+    <li>
+      <a href="/u">List</a>
+    </li>
+  </ul>
+</li><li>
+  <a href="#">
+    <i class="fa fa-server"></i>
     <span class="nav-label">ui</span>
     <span class="fa arrow"></span>
   </a>
