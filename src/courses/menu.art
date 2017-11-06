@@ -1,12 +1,12 @@
 <li>
   <a href="#">
     <i class="fa fa-server"></i>
-    <span class="nav-label">{{folder}}</span>
+    <span class="nav-label">courses</span>
     <span class="fa arrow"></span>
   </a>
   <ul class="nav nav-second-level collapse">
     <li>
-      <a href="/{{folder}}">List</a>
+      <a href="/courses">List</a>
     </li>
   </ul>
 </li>

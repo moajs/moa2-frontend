@@ -50,22 +50,22 @@
                     'toc' ] -->
 
                   <tr>
-                    <td>{{$data.course._id}}</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td>{{$data.course.name}}</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td>{{$data.course.category}}</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td>{{$data.course.price}}</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td>{{$data.course.status}}</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td>{{$data.course.plan}}</td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>

@@ -1,15 +1,14 @@
 <% extend('../../layout/layout.bootstrap.art') %>
-
-  <% block('content', function(){ %>
+<% block('content', function(){ %>
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-12">
-        <h2>管理</h2>
+        <h2>用户管理</h2>
         <ol class="breadcrumb">
           <li>
-            <b><a href="/courses/">列表</a></b>
+            <b><a href="/courses/">用户列表</a></b>
           </li>
           <li>
-            <a href="/courses/new">创建</a>
+            <a href="/courses/new">创建用户</a>
           </li>
         </ol>
       </div>
@@ -26,12 +25,10 @@
               <tr>
                 <!-- th(data-field='state',data-radio='true')　单选-->
                 <th data-field="id" data-align="center" data-formatter="showSerialNum">　序号</th>
-                <th data-field="_id" data-align="center" data-formatter="showId">id</th>
-                <th data-field="name" data-align="center">课程名称</th>
-                <th data-field="sales_num" data-align="center"> 销量 </th>
-                <th data-field="price" data-align="center"> 价格</th>
-                <th data-field="picture" data-align="center" data-formatter="showImage"> 头图</th>
-                <th data-field="recommend" data-align="center"> 是否推荐</th>
+                  <th data-field="name" data-align="center" String>名称</th>
+                  <th data-field="sales_num" data-align="center" String>年龄</th>
+                  <th data-field="price" data-align="center" String>性别</th>
+                  <th data-field="picture" data-align="center" String>简介</th>
                 <th data-field="purchase" data-align="center" data-formatter="purchaseFormatter" data-events="operationEvent">操作</th>
               </tr>
             </thead>
@@ -73,7 +70,7 @@
         }
         //获取ID
         function showId(value, row, index) {
-          return "<a href='/courses/"+ row._id + "' target='_self'> " + row._id + " </a>"
+          return "<a href='//courses/"+ row._id + "' target='_self'> " + row._id + " </a>"
         }
         //获取表格序号
         function showSerialNum(value, row, index) {
@@ -135,4 +132,4 @@
         }
       </script>
     </div>
-    <% }) %>
+<% }) %>
