@@ -1,0 +1,102 @@
+<% extend('../../layout/layout.art') %>
+
+  <% block('content', function(){ %>
+    <!-- .full-height-scroll -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-12">
+        <h2>详情</h2>
+        <ol class="breadcrumb">
+          <li>
+            <a href='/courses/'>列表</a>
+          </li>
+          <li class="active">
+            <b></b><a href='/courses/new'>创建</a></b>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h3>
+                <span class="text-navy">新建</span>
+              </h3>
+            </div>
+            <div class="ibox-content">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <!-- 'name',
+                    'category',
+                    'price',
+                    'picture',
+                    'status',
+                    'plan',
+                    'effect_duration',
+                    'prompt',
+                    'target',
+                    'target_user',
+                    'student_trend',
+                    'evaluation_count',
+                    'evaluation_average_number',
+                    'latest_students',
+                    'toc' ] -->
+
+                  <tr>
+                    <td>{{$data.course._id}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{$data.course.name}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{$data.course.category}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{$data.course.price}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{$data.course.status}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{$data.course.plan}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $('#submit').on('click', function () {
+          // alert($('#editor').val());
+          var cname = $('input[name="name"]').val();
+          var price = $('input[name="price"]').val();
+          var target_user = $('input[name="target_user"]').val();
+          var prompt = $('input[name="price"]').val();
+          var body = {
+            name: cname,
+            price: price,
+            target_user: target_user,
+            prompt: prompt
+          }
+          // return;
+          $.post('/api/courses', body, function (res) {
+            alert(res.status.code === 0 ? "创建成功" : "创建失败")
+            window.location.href = '/courses/list'
+          })
+        });
+      });
+    </script>
+    <script>window.qn_token = ""</script>
+
+    <% }) %>
