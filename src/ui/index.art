@@ -30,7 +30,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">api名称</label>
                   <div class="col-sm-2">
-                    <input type="text" name="api_name" placeholder="英文" class="form-control" />
+                    <input type="text" name="api_name" placeholder="英文" class="form-control" value="{{$data.data.api_name}}"/>
                   </div>
                   <label class="col-sm-2 control-label">字段英文名称</label>
                   <div class="col-sm-4">
@@ -40,7 +40,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">api中文名</label>
                   <div class="col-sm-2">
-                    <input type="text" name="api_name_zh" placeholder="中文" class="form-control" />
+                    <input type="text" name="api_name_zh" placeholder="中文" class="form-control" value="{{$data.data.api_name_zh}}"/>
                   </div>
                   <label class="col-sm-2 control-label">字段中文名称</label>
                   <div class="col-sm-4">
@@ -102,7 +102,7 @@
           <div class="col-sm-10">
           </div>
           <div class="col-sm-1">
-            <button id="submit" type="submit" class="btn btn-primary">提交</button>
+            <button id="submit" type="submit" class="btn btn-primary">生成</button>
           </div>
       </div> 
       <br>
@@ -127,7 +127,14 @@
             // return;
             $.post('/ui/api', body, function (res) {
               if (res.status.code === 0 ) {
-                alert(res.status.code === 0 ? "创建成功" : "创建失败")
+                var msg = res.status.code === 0 ? "创建成功" : "创建失败"
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 1000
+                };
+                toastr.success(msg);
                 // window.location.href = '/ui/list'
                 $("#tableid").bootstrapTable('refresh');
               }

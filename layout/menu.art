@@ -40,13 +40,4 @@
 </li>
     </ul>
   </div>
-  <script>
-  $(function() {
-    if (window.location.pathname !== '/') {
-      setTimeout(function() {
-        $('#side-menu').find('li.active').eq(0).removeClass('active')
-      },0)
-    }
-  })
-  </script>
 </nav>

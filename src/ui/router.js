@@ -2,12 +2,17 @@
 const request = require('request')
 const model = require('./model')
 
-
+const CONFIG_DEFAULT = {
+  api_name_zh:"",
+  api_name:"",
+  items:[]
+}
 // Api
 router.get('/api', function (ctx, next) {
   // ctx.session.config = {}
-  var config = ctx.session.config ? ctx.session.config:{items:[]}
-  
+  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
+  var config = ctx.session.config
+  console.log(config)
   ctx.body = {
     "total": config.items.length,
     "rows": config.items
@@ -83,8 +88,10 @@ router.delete('/api/:id', function (ctx, next) {
 // router.prefix('/courses')
 
 router.get('/', function (ctx, next) {
+  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
   ctx.render('src/ui/index', {
-    title: "2323"
+    title: "2323",
+    data: ctx.session.config
   })
 })
 
