@@ -28,7 +28,7 @@
           </li>
       {{/each}}
 
-      {{if $data.menu}}
+      {{if $data}}
       <li>
         <a href="/ui">
           <i class="fa fa-th"></i>
