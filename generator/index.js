@@ -60,7 +60,7 @@ module.exports = function (model, dest) {
     var _model = init(model)
 
     // generate
-    var arr = ['_form.art', 'edit.art', 'index.art', 'menu.art', 'model.js', 'new.art', 'router.js', 'show.art']
+    var arr = ['_form.art', 'edit.art', 'index.art', 'menu.json', 'model.js', 'new.art', 'router.js', 'show.art']
     // arr = ['edit.art', 'index.art']
     for(var i = 0; i < arr.length; i++) {
         var file = arr[i]

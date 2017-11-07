@@ -9,39 +9,17 @@ function getFileContent(file) {
 var folder_arr = fs.readdirSync(__dirname + '/src')
 
 module.exports = function () {
-    var menu_tpl = __dirname + '/layout/templates/menu.art'
-    var dest_tpl = __dirname + '/layout/menu.art'
-    if (fs.existsSync(menu_tpl)) {
-        var tpl = getFileContent(menu_tpl)
+    let arr = []
+    folder_arr.forEach(function (folder) {
+        if (fs.existsSync(__dirname + '/src/' + folder + '/menu.json')){
+            console.log(folder + " = " + __dirname + '/src/' + folder + '/menu.json')
 
-        var html_arr = []
-        folder_arr.forEach(function (folder) {
-            if (fs.existsSync(__dirname + '/src/' + folder + '/menu.art')){
-                console.log(folder + " = " + __dirname + '/src/' + folder + '/menu.art')
+            var _menu = JSON.parse(getFileContent(__dirname + '/src/' + folder + '/menu.json'))
 
-                var tpl = getFileContent(__dirname + '/src/' + folder + '/menu.art')
-                var render =  art.compile(tpl, {
-                    escape: false
-                });
-                var one_html = render({folder: folder});
-                // console.log("one_html")
-                // console.log(one_html)
-                html_arr.push(one_html)
-            }
-        }, this);
+            console.log(_menu)
+            arr.push(_menu)
+        }
+    }, this);
 
-        var render = art.compile(tpl, {
-            escape: false
-        });
-
-        var html = render({
-            name: "Moajs管理后台",
-            menus: [
-
-            ],
-            new_menu: html_arr.join("")
-        });
-
-        fs.writeFileSync(dest_tpl, html)
-    }
+    return arr
 }

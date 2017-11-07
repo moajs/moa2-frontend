@@ -14,6 +14,9 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
 global.db = low(adapter)
 
+
+require('./watch')()
+
 // Set some defaults
 // db.defaults({ posts: [], user: {} })
 // .write()
