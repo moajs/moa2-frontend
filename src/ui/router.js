@@ -2,6 +2,8 @@ const router = require('koa-router')()
 const request = require('request')
 const model = require('./model')
 
+const sleep = ms => new Promise(r => setTimeout(r, ms))
+
 const CONFIG_DEFAULT = {
   api_name_zh: "",
   api_name: "",
@@ -57,14 +59,37 @@ router.get('/api/list', function (ctx, next) {
 router.get('/project/list', function (ctx, next) {
   // ctx.session.config = {}
   var apis = db.get('apis').value()
-console.dir(apis)
-console.dir(apis.length)
+  console.dir(apis)
+  console.dir(apis.length)
 
 
   ctx.body = {
     "total": apis.length,
     "rows": apis
   }
+})
+
+router.post('/project/generate/:api_name', function (ctx, next) {
+  let api_name = ctx.params.api_name
+  let model = db.get('apis').find({
+    api_name: api_name
+  }).value()
+
+  console.log(model)
+
+  // generate code
+  require('../../generator')(model, process.cwd() + '/src')
+
+  // delay 1 second
+  return sleep(1000).then(function () {
+    ctx.body = {
+      data: {},
+      status: {
+        code: 0,
+        msg: 'sucess'
+      }
+    }
+  })
 })
 
 router.delete('/project/:api_name', function (ctx, next) {

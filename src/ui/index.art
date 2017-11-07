@@ -119,9 +119,21 @@
           },
           'click .action_generate_code': function (e, value, row, index) {
             console.log(row)
-            // var i = row.recommend == false ? 0 : 1
-            console.log('/courses/' + row._id + '/edit');
-            window.location.href = '/courses/' + row._id + '/edit'
+
+
+            $.post('/ui/project/generate/' + row.api_name, {}, function (res) {
+              console.log('/project/generate/' + row.api_name + '/');
+              
+              var msg = res.status.code === 0 ? "生成代码成功" : "生成代码失败"
+              toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 1000
+              }
+              toastr.success(msg)
+              window.location.href = '/ui/'
+            })
           }
         }
 

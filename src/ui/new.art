@@ -124,6 +124,7 @@
             })
           });
           $('#generate_code').on('click', function () { 
+            
           });
 
           $('#resetBtn').on('click', function () { 
