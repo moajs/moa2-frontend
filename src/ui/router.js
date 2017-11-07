@@ -1,4 +1,4 @@
-  const router = require('koa-router')()
+const router = require('koa-router')()
 const request = require('request')
 const model = require('./model')
 
