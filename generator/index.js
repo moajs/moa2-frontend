@@ -47,34 +47,32 @@ const CONFIG = {
     // ├── menu.art
 }
 
-
-
 module.exports = function (model, dest) {
     console.log(dest)
 
     var _dest = dest + '/' + model.api_name
 
-    create_folder (_dest)
- 
+    create_folder(_dest)
+
     // init
     var _model = init(model)
 
     // generate
     var arr = ['_form.art', 'edit.art', 'index.art', 'menu.json', 'model.js', 'new.art', 'router.js', 'show.art']
     // arr = ['edit.art', 'index.art']
-    for(var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
         var file = arr[i]
         console.log(file)
         generate(file, _model, _dest)
     }
 }
-function create_folder (dest) {
+function create_folder(dest) {
     var mkdirp = require('mkdirp');
-    
+
     mkdirp.sync(dest);
 }
 function generate(file, model, dest) {
-    
+
     var source = __dirname + '/tpl/' + file
     tpl.tpl_apply(source, model, dest + '/' + file)
 }
@@ -82,6 +80,3 @@ function generate(file, model, dest) {
 function init(model) {
     return model
 }
-
-
-

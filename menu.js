@@ -13,11 +13,14 @@ module.exports = function () {
     folder_arr.forEach(function (folder) {
         if (fs.existsSync(__dirname + '/src/' + folder + '/menu.json')){
             console.log(folder + " = " + __dirname + '/src/' + folder + '/menu.json')
+            var content = getFileContent(__dirname + '/src/' + folder + '/menu.json')
+            if (content) {
+                var _menu = JSON.parse(content)
+                console.log(_menu)
+                arr.push(_menu)
+            }
 
-            var _menu = JSON.parse(getFileContent(__dirname + '/src/' + folder + '/menu.json'))
-
-            console.log(_menu)
-            arr.push(_menu)
+            
         }
     }, this);
 

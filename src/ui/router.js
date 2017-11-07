@@ -82,6 +82,7 @@ router.post('/project/generate/:api_name', function (ctx, next) {
 
   // delay 1 second
   return sleep(1000).then(function () {
+    global.menu = require('../../menu')()
     ctx.body = {
       data: {},
       status: {
