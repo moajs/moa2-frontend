@@ -1,0 +1,25 @@
+ {{if !$data.children}}
+<li>
+    <a href="{{$data.url || '#'}}">{{$data.name || 'no name'}}</a>
+</li>
+{{/if}} 
+
+
+{{if $data.children}}
+    <li>
+        <a href="{{$data.url || '#'}}">{{$data.name || 'no name'}}</a>
+    </li>
+
+    {{if $data.children}}
+
+    <ul class="nav nav-third-level">
+        {{each $data.children}}
+        <li>
+                <!-- {{$value}} -->
+                <a href="{{$value.url}}">{{$value.name}}</a>
+        </li>
+        {{/each }}
+
+    </ul>
+    {{/if}} 
+{{/if}}

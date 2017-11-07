@@ -1,4 +1,4 @@
-<nav role="navigation" class="navbar-default navbar-static-side">
+<nav role="navigation" class="navbar-default navbar-static-side"> 
   <div class="sidebar-collapse">
     <ul id="side-menu" class="nav metismenu">
       <li class="nav-header">
@@ -14,52 +14,19 @@
           <span class="label label-info pull-right">推荐</span>
         </a>
       </li>
-
-      <li>
-  <a href="#">
-    <i class="fa fa-server"></i>
-    <span class="nav-label">courses</span>
-    <span class="fa arrow"></span>
-  </a>
-  <ul class="nav nav-second-level collapse">
-    <li>
-      <a href="/courses">List</a>
-    </li>
-  </ul>
-</li><li>
-  <a href="#">
-    <i class="fa fa-server"></i>
-    <span class="nav-label">courses22</span>
-    <span class="fa arrow"></span>
-  </a>
-  <ul class="nav nav-second-level collapse">
-    <li>
-      <a href="/courses22">List</a>
-    </li>
-  </ul>
-</li><li>
-  <a href="#">
-    <i class="fa fa-server"></i>
-    <span class="nav-label">u</span>
-    <span class="fa arrow"></span>
-  </a>
-  <ul class="nav nav-second-level collapse">
-    <li>
-      <a href="/u">List</a>
-    </li>
-  </ul>
-</li><li>
-  <a href="#">
-    <i class="fa fa-server"></i>
-    <span class="nav-label">ui</span>
-    <span class="fa arrow"></span>
-  </a>
-  <ul class="nav nav-second-level collapse">
-    <li>
-      <a href="/ui">List</a>
-    </li>
-  </ul>
-</li>
+      {{each $data.menu}}
+          <!-- {{$index}} {{$value}} -->
+          <li>
+              <a href="{{$value.url || '#'}}}"><i class="fa fa-sitemap"></i> <span class="nav-label">{{$value.name || "no name"}} </span><span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level collapse">
+                  <li>
+                      {{each $value.children}} 
+                        {{include './templates/menu.child.art' $value}}
+                      {{/each}}
+                  </li>
+              </ul>
+          </li>
+      {{/each}}
     </ul>
   </div>
 </nav>

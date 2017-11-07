@@ -36,7 +36,7 @@ const CONFIG = {
 app.use(session(CONFIG, app));
 // or if you prefer all default config, just use => app.use(session(app));
 
-require('./menu')()
+// require('./menu')()
 
 // error handler
 onerror(app)
