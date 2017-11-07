@@ -15,8 +15,8 @@ const adapter = new FileSync('db.json')
 global.db = low(adapter)
 
 // Set some defaults
-db.defaults({ posts: [], user: {} })
-.write()
+// db.defaults({ posts: [], user: {} })
+// .write()
 
 const session = require('koa-session');
 app.keys = ['some secret hurr'];
