@@ -35,6 +35,14 @@
           <span class="nav-label">设计</span>
           <span class="label label-info pull-right">管理</span>
         </a>
+        <ul class="nav nav-second-level collapse">
+          <li>
+            <a href="/ui/new">新建Api</a>
+          </li>
+          <li>
+            <a href="/ui/">Api列表</a>
+          </li>
+        </ul>
       </li>
       {{/if}}
     </ul>

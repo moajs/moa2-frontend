@@ -7,8 +7,19 @@ const CONFIG_DEFAULT = {
   api_name:"",
   items:[]
 }
+
+router.get('/list', function (ctx, next) {
+  // ctx.session.config = {}
+  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
+  var config = ctx.session.config
+  console.log(config)
+  ctx.body = {
+    "total": config.items.length,
+    "rows": config.items
+  }
+})
 // Api
-router.get('/api', function (ctx, next) {
+router.get('/api/list', function (ctx, next) {
   // ctx.session.config = {}
   if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
   var config = ctx.session.config
@@ -101,14 +112,16 @@ router.delete('/api/:id', function (ctx, next) {
 router.get('/', function (ctx, next) {
   if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
   ctx.render('src/ui/index', {
-    title: "2323",
+    title: "Api列表",
     data: ctx.session.config
   })
 })
 
 router.get('/new', function (ctx, next) {
+  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
   ctx.render('src/ui/new', {
-    title: "2323"
+    title: "新建Api",
+    data: ctx.session.config
   })
 })
 
