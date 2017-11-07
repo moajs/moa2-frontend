@@ -45,6 +45,17 @@ router.post('/api', function (ctx, next) {
     }
   }
 })
+router.post('/api/reset', function (ctx, next) {
+  var config = ctx.session.config = CONFIG_DEFAULT
+  console.log(config)
+  ctx.body = {
+    data: config,
+    status: {
+      code: 0,
+      msg: 'sucess'
+    }
+  }
+})
 
 router.delete('/api/:en_name', function (ctx, next) {
   var en_name = ctx.params.en_name

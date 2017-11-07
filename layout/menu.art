@@ -27,13 +27,16 @@
               </ul>
           </li>
       {{/each}}
+
+      {{if $data.menu}}
       <li>
         <a href="/ui">
           <i class="fa fa-th"></i>
           <span class="nav-label">设计</span>
-          <span class="label label-info pull-right">推荐</span>
+          <span class="label label-info pull-right">管理</span>
         </a>
       </li>
+      {{/if}}
     </ul>
   </div>
 </nav>
