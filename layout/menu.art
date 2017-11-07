@@ -11,7 +11,7 @@
         <a href="/">
           <i class="fa fa-th"></i>
           <span class="nav-label">首页</span>
-          <span class="label label-info pull-right">推荐</span>
+          <span class="label label-info pull-right"></span>
         </a>
       </li>
       {{each $data.menu}}
@@ -27,6 +27,13 @@
               </ul>
           </li>
       {{/each}}
+      <li>
+        <a href="/ui">
+          <i class="fa fa-th"></i>
+          <span class="nav-label">设计</span>
+          <span class="label label-info pull-right">推荐</span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
