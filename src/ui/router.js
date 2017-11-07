@@ -3,10 +3,33 @@ const request = require('request')
 const model = require('./model')
 
 const CONFIG_DEFAULT = {
-  api_name_zh:"",
-  api_name:"",
-  items:[]
+  api_name_zh: "",
+  api_name: "",
+  items: []
 }
+
+
+router.get('/', function (ctx, next) {
+  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
+  ctx.render('src/ui/index', {
+    title: "Api列表",
+    data: ctx.session.config
+  })
+})
+
+router.get('/new', function (ctx, next) {
+  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
+  ctx.render('src/ui/new', {
+    title: "新建Api",
+    data: ctx.session.config
+  })
+})
+
+router.get('/:id/edit', function (ctx, next) {
+  ctx.render('src/ui/edit', {
+    title: "2323"
+  })
+})
 
 router.get('/list', function (ctx, next) {
   // ctx.session.config = {}
@@ -30,7 +53,69 @@ router.get('/api/list', function (ctx, next) {
   }
 })
 
-router.post('/api', function (ctx, next) {
+// Api
+router.get('/project/list', function (ctx, next) {
+  // ctx.session.config = {}
+  var apis = db.get('apis').value()
+console.dir(apis)
+console.dir(apis.length)
+
+
+  ctx.body = {
+    "total": apis.length,
+    "rows": apis
+  }
+})
+
+router.delete('/project/:api_name', function (ctx, next) {
+  let api_name = ctx.params.api_name
+
+  db.get('apis')
+    .remove({ api_name: api_name })
+    .write()
+
+  return ctx.body = {
+    data: {},
+    status: {
+      code: 0,
+      msg: 'sucess'
+    }
+  }
+});
+
+
+router.post('/api/save', function (ctx, next) {
+  // ctx.session.config = {}
+  if (!ctx.session.config) {
+    return ctx.body = {
+      data: config,
+      status: {
+        code: -1,
+        msg: 'fail'
+      }
+    }
+  }
+
+  // save api to db
+  db.get('apis')
+    .push(ctx.session.config)
+    .write()
+
+  // reset session
+  var config = ctx.session.config = CONFIG_DEFAULT
+  console.log(config)
+
+  // return api
+  ctx.body = {
+    data: {},
+    status: {
+      code: 0,
+      msg: 'sucess'
+    }
+  }
+})
+
+router.post('/api/add', function (ctx, next) {
   var body = ctx.request.body
 
   console.log(body)
@@ -73,11 +158,11 @@ router.delete('/api/:en_name', function (ctx, next) {
   var config = ctx.session.config ? ctx.session.config : {}
   var newItems = []
 
-   config.items.map(function (item) {
+  config.items.map(function (item) {
     console.log(en_name)
     console.log(item.en_name)
     if (item.en_name === en_name) {
-      
+
     } else {
       newItems.push(item)
     }
@@ -104,50 +189,6 @@ router.delete('/api/:id', function (ctx, next) {
     })
   }).then(function (courses) {
     ctx.body = courses
-  })
-})
-
-// router.prefix('/courses')
-
-router.get('/', function (ctx, next) {
-  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
-  ctx.render('src/ui/index', {
-    title: "Api列表",
-    data: ctx.session.config
-  })
-})
-
-router.get('/new', function (ctx, next) {
-  if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
-  ctx.render('src/ui/new', {
-    title: "新建Api",
-    data: ctx.session.config
-  })
-})
-
-router.get('/:id/edit', function (ctx, next) {
-  ctx.render('src/ui/edit', {
-    title: "2323"
-  })
-})
-
-router.get('/:id', function (ctx, next) {
-  let id = ctx.params.id
-  return new Promise(function (resolve, reject) {
-    request('http://127.0.0.1:3000/api/courses/' + id, function (error, response, body) {
-      console.log('error:', error) // Print the error if one occurred
-      console.log('statusCode:', response && response.statusCode) // Print the response status code if a response was received
-
-      var obj = JSON.parse(body)
-      var course = obj.data.course
-      console.log('body:', course) // Print the HTML for the Google homepage.
-      resolve(course)
-    })
-  }).then(function (course) {
-    ctx.render('src/ui/show', {
-      title: "2323",
-      course: course
-    })
   })
 })
 

@@ -109,6 +109,19 @@
       <script>
         $(document).ready(function () {
           $('#save_config').on('click', function () {
+            $.post('/ui/api/save', {}, function (res) {
+              var msg = res.status.code === 0 ? "保存配置成功" : "保存配置失败"
+              toastr.options = {
+                  closeButton: true,
+                  progressBar: true,
+                  showMethod: 'slideDown',
+                  timeOut: 1000
+              };
+              toastr.success(msg);
+              setTimeout(function() {
+                window.location.href = '/ui/'
+              }, 1000)
+            })
           });
           $('#generate_code').on('click', function () { 
           });
@@ -144,7 +157,7 @@
               item_type: item_type
             }
             // return;
-            $.post('/ui/api/list', body, function (res) {
+            $.post('/ui/api/add', body, function (res) {
               if (res.status.code === 0 ) {
                 var msg = res.status.code === 0 ? "创建成功" : "创建失败"
                 toastr.options = {
@@ -164,7 +177,7 @@
       <script>
         $(function () {
           var $obj = $('#tableid');
-          var url = '/ui/api/';
+          var url = '/ui/api/list';
           var params = function queryParams(params) {
             return {
               limit: params.limit,

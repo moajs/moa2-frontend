@@ -1,112 +1,137 @@
-<% extend('../../layout/layout.simditor.art') %>
+<% extend('../../layout/layout.bootstrap.art') %>
 
   <% block('content', function(){ %>
     <!-- .full-height-scroll -->
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-12">
-        <h2>编辑</h2>
+        <h2>Api管理</h2>
         <ol class="breadcrumb">
           <li>
-              <a href='/courses/'>列表</a>
+            <b>
+              <a href='/ui/'>列表</a>
+            </b>
           </li>
           <li class="active">
-            <b>编辑</b>
+            <a href='/ui/new'>新建</a>
           </li>
         </ol>
       </div>
     </div>
+
     <div class="wrapper wrapper-content animated fadeInRight">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="ibox">
-            <div class="ibox-title">
-              <h3>
-                <span class="text-navy">新建课程</span>
-              </h3>
-            </div>
-            <div class="ibox-content">
-              <form id="form" method="post" onsubmit="return false" class="form-horizontal">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">课程名称</label>
-                  <div class="col-sm-4">
-                    <input type="text" name="name" placeholder="标题一定醒目" class="form-control" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">价格</label>
-                  <div class="col-sm-4">
-                    <input type="text" name="price" placeholder="整数" class="form-control" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">提示信息</label>
-                  <div class="col-sm-4">
-                    <input type="text" name="prompt" placeholder="官方提示信息" class="form-control" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">受众</label>
-                  <div class="col-sm-4">
-                    <input type="text" name="target_user" placeholder="细分用户群体" class="form-control" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">状态</label>
-                  <div class="col-sm-2">
-                    <select name="jobType" class="form-control">
-                      <option value="REAL_TIME_JOB">更新中</option>
-                      <option value="TRIGGER_TIME_JOB">直播课程</option>
-                      <option value="CRON_JOB">不可用</option>
-                    </select>
-                  </div>
-                  <div id="cronJob" style="display:none;" class="col-sm-3">
-                    <input type="text" name="cronExpression" placeholder="请输入CronExpression" class="form-control" />
-                  </div>
-                  <div id="triggerTimeJob" style="display:none;" class="col-sm-3">
-                    <input id="triggerTime" type="text" style="width:160px" name="triggerTime" date-format="yyyy-MM-dd HH:mm:ss" placeholder="请输入触发时间"
-                      class="form-control datepicker" />
-                  </div>
-                </div>
-                <div class="form-group full-height-scroll">
-                  <textare id="editor" placeholder="课程具体内容，请详细描述" autofocus="autofocus"></textare>
-                </div>
-                <div class="form-group">
-                  <div style="width:70px;" class="col-sm-1 col-sm-offset-3">
-                    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                  <div style="width:70px;" class="col-sm-1 col-sm-offset-3">
-                    <button id="editBtn" type="button" class="btn btn-danger">Cancel</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+        <div class="col-sm-12">
+          <table id="tableid" data-toggle="table" data-smart-display="false" data-click-to-select="false" data-pagination="true" data-side-pagination="server"
+            data-page-list="[1,5, 10, 20, 50, 100, 200]" data-response-handler="responseHandler" data-classes="table table-hover table-no-bordered table-condensed table-responsive "
+            data-search="false" data-show-export="true" data-show-pagination-switch="false" data-show-footer="false" data-show-refresh="true"
+            data-show-toggle="true" data-show-columns="true" data-striped="true" data-detail-view="false" data-detail-formatter="detailFormatter"
+            data-minimum-count-columns="2" data-height="590">
+            <thead>
+              <tr>
+                <th data-field="id" data-align="center" data-formatter="showSerialNum">　序号</th>
+                <th data-field="api_name" data-align="center" String>api_name</th>
+                <th data-field="api_name_zh" data-align="center" String>中文名</th>
+                <th data-field="purchase" data-align="center" data-formatter="purchaseFormatter" data-events="operationEvent">操作</th>
+              </tr>
+            </thead>
+          </table>
         </div>
       </div>
-    </div>
-
-    <script>
-      $(document).ready(function () {
-        $('#submit').on('click', function () {
-          // alert($('#editor').val());
-          var cname = $('input[name="name"]').val();
-          var price = $('input[name="price"]').val();
-          var target_user = $('input[name="target_user"]').val();
-          var prompt = $('input[name="price"]').val();
-          var body = {
-            name: cname,
-            price: price,
-            target_user: target_user,
-            prompt: prompt
+      <script>
+        $(function () {
+          var $obj = $('#tableid');
+          var url = '/ui/project/list';
+          var params = function queryParams(params) {
+            return {
+              limit: params.limit,
+              offset: params.offset
+            }
           }
-          // return;
-          $.post('/api/courses', body, function (res) {
-            alert(res.status.code === 0 ? "创建成功" : "创建失败")
-            window.location.href = '/courses/list'
-          })
+          getTables($obj, url, 'get', params);
         });
-      });
-    </script>
-    <script>window.qn_token = ""</script>
+        //发送请求获取数据
+        function getTables(obj, url, method, params) {
+          $(obj).bootstrapTable('destroy');
+          $(obj).bootstrapTable({
+            url: url,
+            method: method,
+            queryParams: params
+          });
+        }
+        //返回数据处理
+        function responseHandler(res) {
+          return res
+        }
+        //样式的调整
+        function radioStyle() {
+          return {
+            css: {
+              'min-width': '35px'
+            }
+          }
+        }
+        //获取ID
+        function showId(value, row, index) {
+          return "<a href='//courses/" + row._id + "' target='_self'> " + row._id + " </a>"
+        }
+        //获取表格序号
+        function showSerialNum(value, row, index) {
+          return index + 1;
+        }
+        //详情显示
+        function detailFormatter(index, row, element) {
+          return "暂无内容";
+        }
+        function showImage(index, row, element) {
+          console.log(row)
+          if (row.picture) {
+            return "<img width='60px' src='" + row.picture + "'></img>"
+          }
+          return "暂无图文说明";
+        }
+        function purchaseFormatter() {
+          return [
+            '<a class="action_generate_code" href="javascript:void(0)" title="Edit">',
+            '生成代码',
+            '</a>',
+            '|',
+            '<a class="action_delete" href="javascript:void(0)" title="Edit">',
+            '删除',
+            '</a>'].join('');
+        }
+        window.operationEvent = {
+          'click .action_delete': function (e, value, row, index) {
+            console.log(row)
+            var msg = "您真的确定要删除吗？";
+            if (confirm(msg) == true) {
+              $.ajax({
+                url: '/ui/project/' + row.api_name,
+                type: 'DELETE',
+                success: function (result) {
+                  // Do something with the result
+                  $("#tableid").bootstrapTable('refresh');
+                }
+              });
+              return true;
+            } else {
+              return false;
+            }
+          },
+          'click .action_generate_code': function (e, value, row, index) {
+            console.log(row)
+            // var i = row.recommend == false ? 0 : 1
+            console.log('/courses/' + row._id + '/edit');
+            window.location.href = '/courses/' + row._id + '/edit'
+          }
+        }
 
+        function getQueryStringByName(name) {
+          var result = decodeURI(location.search).match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+          if (result == null || result.length < 1) {
+            return "";
+          }
+          return decodeURI(result[1]);
+        }
+      </script>
+    </div>
     <% }) %>
