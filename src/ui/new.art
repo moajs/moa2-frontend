@@ -157,6 +157,11 @@
               item_en_name: item_en_name,
               item_type: item_type
             }
+            for(var key in body) {
+              if (!body[key]) {
+                return alert("所有字段都需要填写")
+              }
+            }
             // return;
             $.post('/ui/api/add', body, function (res) {
               if (res.status.code === 0 ) {

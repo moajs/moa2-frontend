@@ -15,7 +15,7 @@ const adapter = new FileSync('db.json')
 global.db = low(adapter)
 
 
-require('./watch')()
+// require('./watch')()
 
 // Set some defaults
 // db.defaults({ posts: [], user: {} })
