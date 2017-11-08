@@ -3,26 +3,8 @@
   "url": "#",
   "children": [
     {
-      "name": "List",
+      "name": "列表",
       "url": "/{{api_name}}"
-    },
-    {
-      "name": "New",
-      "url": "/{{api_name}}/new"
-    },
-    {
-      "name": "List",
-      "url": "#",
-      "children": [
-        {
-          "name": "List",
-          "url": "/{{api_name}}"
-        },
-        {
-          "name": "New",
-          "url": "/{{api_name}}/new"
-        }
-      ]
     }
   ]
 }
