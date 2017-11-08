@@ -30,7 +30,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">api名称</label>
                   <div class="col-sm-2">
-                    <input type="text" name="api_name" placeholder="英文" class="form-control" value="{{$data.data.api_name}}" />
+                    <input type="text" name="api_name" placeholder="英文" class="form-control" value="{{$data.data.api_name}}"/>
                   </div>
                   <label class="col-sm-2 control-label">字段英文名称</label>
                   <div class="col-sm-4">
@@ -40,7 +40,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">api中文名</label>
                   <div class="col-sm-2">
-                    <input type="text" name="api_name_zh" placeholder="中文" class="form-control" value="{{$data.data.api_name_zh}}" />
+                    <input type="text" name="api_name_zh" placeholder="中文" class="form-control" value="{{$data.data.api_name_zh}}"/>
                   </div>
                   <label class="col-sm-2 control-label">字段中文名称</label>
                   <div class="col-sm-4">
@@ -48,33 +48,33 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label"></label>
-                  <div class="col-sm-2">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-2">
+                    </div>
+                    <label class="col-sm-2 control-label">字段类型</label>
+                    <div class="col-sm-4">
+                        <select name="item_type" class="form-control">
+                            <option value="string">String</option>
+                            <option value="number">Number</option>
+                            <option value="image">Image</option>
+                          </select>
+                    </div>
                   </div>
-                  <label class="col-sm-2 control-label">字段类型</label>
-                  <div class="col-sm-4">
-                    <select name="item_type" class="form-control">
-                      <option value="string">String</option>
-                      <option value="number">Number</option>
-                      <option value="image">Image</option>
-                    </select>
-                  </div>
-                </div>
-
+ 
                 <div class="form-group">
-                  <label class="col-sm-2 control-label"></label>
-                  <div class="col-sm-2">
-                  </div>
-                  <label class="col-sm-4 control-label"></label>
-                  <div class="col-sm-2">
-                    <button id="submit" type="submit" class="btn btn-primary">创建字段</button>
-                  </div>
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-2">
+                    </div>
+                    <label class="col-sm-4 control-label"></label>
+                    <div class="col-sm-2">
+                        <button id="submit" type="submit" class="btn btn-primary">创建字段</button>
+                    </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
+      </div> 
       <div class="row">
         <div class="col-sm-12">
           <table id="tableid" data-toggle="table" data-smart-display="false" data-click-to-select="false" data-pagination="false" data-side-pagination="server"
@@ -96,14 +96,14 @@
       </div>
       <br>
       <div class="row">
-        <div class="col-sm-9">
-        </div>
-        <div class="col-sm-3">
-          <button id="save_config" type="submit" class="btn btn-primary">保存配置</button>
-          <button id="generate_code" type="submit" class="btn btn-primary">生成代码</button>
-          <button id="resetBtn" type="button" class="btn btn-danger">重置</button>
-        </div>
-      </div>
+          <div class="col-sm-9">
+          </div>
+          <div class="col-sm-3">
+            <button id="save_config" type="submit" class="btn btn-primary">保存配置</button>
+            <button id="generate_code" type="submit" class="btn btn-primary">生成代码</button>
+            <button id="resetBtn" type="button" class="btn btn-danger">重置</button>
+          </div>
+      </div> 
       <br>
       <br>
       <script>
@@ -112,36 +112,36 @@
             $.post('/ui/api/save', {}, function (res) {
               var msg = res.status.code === 0 ? "保存配置成功" : "保存配置失败"
               toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 1000
+                  closeButton: true,
+                  progressBar: true,
+                  showMethod: 'slideDown',
+                  timeOut: 1000
               };
               toastr.success(msg);
-              setTimeout(function () {
+              setTimeout(function() {
                 window.location.href = '/ui/'
               }, 1000)
             })
           });
-          $('#generate_code').on('click', function () {
-
+          $('#generate_code').on('click', function () { 
+            
           });
 
-          $('#resetBtn').on('click', function () {
+          $('#resetBtn').on('click', function () { 
             $.post('/ui/api/reset', {}, function (res) {
               var msg = res.status.code === 0 ? "重置成功" : "重置失败"
               toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 1000
+                  closeButton: true,
+                  progressBar: true,
+                  showMethod: 'slideDown',
+                  timeOut: 1000
               };
               toastr.success(msg);
               // window.location.href = '/ui/list'
               $("#tableid").bootstrapTable('refresh');
             })
           });
-
+          
           $('#submit').on('click', function () {
             // alert($('#editor').val());
             var api_name = $('input[name="api_name"]').val();
@@ -149,7 +149,7 @@
             var item_zh_name = $('input[name="item_zh_name"]').val();
             var item_en_name = $('input[name="item_en_name"]').val();
             var item_type = $('select[name="item_type"]').val();
-
+    
             var body = {
               api_name: api_name,
               api_name_zh: api_name_zh,
@@ -157,30 +157,35 @@
               item_en_name: item_en_name,
               item_type: item_type
             }
-            for (var key in body) {
+            for(var key in body) {
               if (!body[key]) {
                 return alert("所有字段都需要填写")
               }
             }
             // return;
             try {
-              $.post('/ui/api/add', body, function (res) {
-                if (res.status.code === 0) {
-                  var msg = res.status.code === 0 ? "创建成功" : "创建失败"
-                  toastr.options = {
+              
+            } catch (error) {
+              
+            }
+            $.post('/ui/api/add', body, function (res) {
+              if (res.status.code === 0 ) {
+                var msg = res.status.code === 0 ? "创建成功" : "创建失败"
+                toastr.options = {
                     closeButton: true,
                     progressBar: true,
                     showMethod: 'slideDown',
                     timeOut: 1000
-                  };
-                  toastr.success(msg);
-                  // window.location.href = '/ui/list'
-                  // $("#tableid").bootstrapTable('refresh');
-                }
-              })
-            } catch (error) {
+                };
+                toastr.success(msg);
+                // window.location.href = '/ui/list'
+                // $("#tableid").bootstrapTable('refresh');
+              }
+            })
+
+            setTimeout(function () {
               window.location.href = '/'
-            }
+            }, 2000)
           });
         });
       </script>
@@ -248,7 +253,7 @@
         window.operationEvent = {
           'click .action_delete': function (e, value, row, index) {
             console.log(row)
-            var msg = "您真的确定要删除吗？";
+            var msg = "您真的确定要删除吗？"; 
             if (confirm(msg) == true) {
               $.ajax({
                 url: '/ui/api/' + row.en_name,
@@ -257,10 +262,10 @@
                   // Do something with the result
                   $("#tableid").bootstrapTable('refresh');
                 }
-              });
-              return true;
-            } else {
-              return false;
+              });  
+              return true; 
+            } else {  
+              return false; 
             }
           }
         }

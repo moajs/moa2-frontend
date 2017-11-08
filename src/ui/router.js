@@ -92,6 +92,26 @@ router.post('/project/generate/:api_name', function (ctx, next) {
     }
   })
 })
+router.delete('/project/remove/:api_name', function (ctx, next) {
+  let api_name = ctx.params.api_name
+  var rimraf = require('rimraf')
+
+  return new Promise(function (resolve, reject) {
+    rimraf(home + '/src/' + api_name, function (err) {
+      console.log(err)
+      console.log('rm dir = ' + home + '/src/' + api_name)
+      resolve()
+    })
+  }).then(function () {
+    return ctx.body = {
+      data: {},
+      status: {
+        code: 0,
+        msg: 'sucess'
+      }
+    }
+  })
+});
 
 router.delete('/project/:api_name', function (ctx, next) {
   let api_name = ctx.params.api_name

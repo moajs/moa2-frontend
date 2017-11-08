@@ -95,6 +95,10 @@
             '生成代码',
             '</a>',
             '|',
+            '<a class="action_remove_code" href="javascript:void(0)" title="Edit">',
+            '删除代码',
+            '</a>',
+            '|',
             '<a class="action_delete" href="javascript:void(0)" title="Edit">',
             '删除',
             '</a>'].join('');
@@ -117,23 +121,47 @@
               return false;
             }
           },
+          'click .action_remove_code': function (e, value, row, index) {
+            console.log(row)
+            var msg = "您真的确定要删除吗？";
+            if (confirm(msg) == true) {
+              $.ajax({
+                url: '/ui/project/remove/' + row.api_name,
+                type: 'DELETE',
+                success: function (result) {
+                  // Do something with the result
+                  $("#tableid").bootstrapTable('refresh');
+                }
+              });
+              return true;
+            } else {
+              return false;
+            }
+          },
           'click .action_generate_code': function (e, value, row, index) {
             console.log(row)
 
+            // return;
+            try {
+              $.post('/ui/project/generate/' + row.api_name, {}, function (res) {
+                console.log('/project/generate/' + row.api_name + '/');
 
-            $.post('/ui/project/generate/' + row.api_name, {}, function (res) {
-              console.log('/project/generate/' + row.api_name + '/');
-              
-              var msg = res.status.code === 0 ? "生成代码成功" : "生成代码失败"
-              toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 1000
-              }
-              toastr.success(msg)
-              window.location.href = '/ui/'
-            })
+                var msg = res.status.code === 0 ? "生成代码成功" : "生成代码失败"
+                toastr.options = {
+                  closeButton: true,
+                  progressBar: true,
+                  showMethod: 'slideDown',
+                  timeOut: 1000
+                }
+                toastr.success(msg)
+                window.location.href = '/'
+              })
+            } catch (error) {
+              setTimeout(function() {
+                window.location.href = '/'
+              }, 1000)
+            }
+
           }
         }
 
