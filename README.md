@@ -134,6 +134,9 @@ module.exports = {
 
 ## 使用lowdb纯json存储配置文件
 
+- api的模型
+- 目录
+
 ```
 {
     api_name: api_name,
@@ -147,6 +150,11 @@ module.exports = {
 	]
 }
 ```
+
+## TODO
+
+- 目录db存储
+- 拆分主从，避免src下加代码自动relaod导致api405
 
 ## Tasks
 
