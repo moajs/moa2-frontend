@@ -7,11 +7,11 @@
         <ol class="breadcrumb">
           <li>
             <b>
-              <a href="/ui/">列表</a>
+              <a href="/admin/">列表</a>
             </b>
           </li>
           <li>
-            <a href="/ui/new">创建</a>
+            <a href="/admin/new">创建</a>
           </li>
         </ol>
       </div>
@@ -109,7 +109,7 @@
       <script>
         $(document).ready(function () {
           $('#save_config').on('click', function () {
-            $.post('/ui/api/save', {}, function (res) {
+            $.post('/admin/api/save', {}, function (res) {
               var msg = res.status.code === 0 ? "保存配置成功" : "保存配置失败"
               toastr.options = {
                   closeButton: true,
@@ -119,7 +119,7 @@
               };
               toastr.success(msg);
               setTimeout(function() {
-                window.location.href = '/ui/'
+                window.location.href = '/admin/'
               }, 1000)
             })
           });
@@ -128,7 +128,7 @@
           });
 
           $('#resetBtn').on('click', function () { 
-            $.post('/ui/api/reset', {}, function (res) {
+            $.post('/admin/api/reset', {}, function (res) {
               var msg = res.status.code === 0 ? "重置成功" : "重置失败"
               toastr.options = {
                   closeButton: true,
@@ -137,7 +137,7 @@
                   timeOut: 1000
               };
               toastr.success(msg);
-              // window.location.href = '/ui/list'
+              // window.location.href = '/admin/list'
               $("#tableid").bootstrapTable('refresh');
             })
           });
@@ -168,7 +168,7 @@
             } catch (error) {
               
             }
-            $.post('/ui/api/add', body, function (res) {
+            $.post('/admin/api/add', body, function (res) {
               if (res.status.code === 0 ) {
                 var msg = res.status.code === 0 ? "创建成功" : "创建失败"
                 toastr.options = {
@@ -178,7 +178,7 @@
                     timeOut: 1000
                 };
                 toastr.success(msg);
-                // window.location.href = '/ui/list'
+                // window.location.href = '/admin/list'
                 // $("#tableid").bootstrapTable('refresh');
               }
             })
@@ -192,7 +192,7 @@
       <script>
         $(function () {
           var $obj = $('#tableid');
-          var url = '/ui/api/list';
+          var url = '/admin/api/list';
           var params = function queryParams(params) {
             return {
               limit: params.limit,
@@ -224,7 +224,7 @@
         }
         //获取ID
         function showId(value, row, index) {
-          return "<a href='/ui/" + row._id + "' target='_self'> " + row._id + " </a>"
+          return "<a href='/admin/" + row._id + "' target='_self'> " + row._id + " </a>"
         }
         //获取表格序号
         function showSerialNum(value, row, index) {
@@ -256,7 +256,7 @@
             var msg = "您真的确定要删除吗？"; 
             if (confirm(msg) == true) {
               $.ajax({
-                url: '/ui/api/' + row.en_name,
+                url: '/admin/api/' + row.en_name,
                 type: 'DELETE',
                 success: function (result) {
                   // Do something with the result

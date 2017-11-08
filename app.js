@@ -20,6 +20,7 @@ global.home = __dirname
 // Set some defaults
 // db.defaults({ posts: [], user: {} })
 // .write()
+global.menu = require('./menu')()
 
 const session = require('koa-session');
 app.keys = ['some secret hurr'];

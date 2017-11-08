@@ -13,7 +13,7 @@ const CONFIG_DEFAULT = {
 
 router.get('/', function (ctx, next) {
   if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
-  ctx.render('src/ui/index', {
+  ctx.render('src/admin/index', {
     title: "Api列表",
     data: ctx.session.config
   })
@@ -21,14 +21,14 @@ router.get('/', function (ctx, next) {
 
 router.get('/new', function (ctx, next) {
   if (!ctx.session.config) ctx.session.config = CONFIG_DEFAULT
-  ctx.render('src/ui/new', {
+  ctx.render('src/admin/new', {
     title: "新建Api",
     data: ctx.session.config
   })
 })
 
 router.get('/:id/edit', function (ctx, next) {
-  ctx.render('src/ui/edit', {
+  ctx.render('src/admin/edit', {
     title: "2323"
   })
 })

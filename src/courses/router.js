@@ -62,7 +62,8 @@ router.delete('/api/:id', function (ctx, next) {
 
 router.get('/', function (ctx, next) {
   ctx.render('src/courses/index', {
-    title: "2323"
+    title: "2323",
+    menu: menu
   })
 })
 

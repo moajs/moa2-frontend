@@ -1,7 +1,6 @@
 const router = require('koa-router')()
 
 router.get('/', async (ctx, next) => {
-  global.menu = require('../../menu')()
   await ctx.render('src/index/index', {
     title: 'Hello Koa 2!',
     menu: menu
