@@ -10,36 +10,39 @@ block content
   <% block('content', function(){ %>
     <div>
 
-      <h1 class="logo-name">IN+</h1>
+      <h1 class="logo-name">Moajs</h1>
 
     </div>
-    <h3>Register to IN+</h3>
-    <p>Create account to see it in action.</p>
+    <h3>注册用户</h3>
+    <p>创建账号后你将拥有更多</p>
     <form class="m-t" role="form" action="login.html">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Name" required="">
+        <input type="text" class="form-control" placeholder="用户名" required="">
       </div>
       <div class="form-group">
-        <input type="email" class="form-control" placeholder="Email" required="">
+        <input type="email" class="form-control" placeholder="邮件" required="">
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" required="">
+        <input type="password" class="form-control" placeholder="密码" required="">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="确认密码" required="">
       </div>
       <div class="form-group">
         <div class="checkbox i-checks">
           <label>
             <input type="checkbox">
-            <i></i> Agree the terms and policy </label>
+            <i></i>  我已阅读并同意 《用户注册协议》 </label>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+      <button type="submit" class="btn btn-primary block full-width m-b">注册</button>
 
       <p class="text-muted text-center">
-        <small>Already have an account?</small>
+        <small>已有账户?</small>
       </p>
-      <a class="btn btn-sm btn-white btn-block" href="login.html">Login</a>
+      <a class="btn btn-sm btn-white btn-block" href="login.html">登录</a>
     </form>
     <p class="m-t">
-      <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+      <small>Moajs.com &copy; 2017</small>
     </p>
     <% }) %>
